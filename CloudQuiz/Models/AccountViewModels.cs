@@ -49,10 +49,8 @@ namespace CloudQuiz.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Адрес электронной почты")]
-        [EmailAddress]
-        public string Email { get; set; }
-
+        [Display(Name = "Логин")]
+        public string UserName { get; set; }
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
@@ -64,11 +62,19 @@ namespace CloudQuiz.Models
 
     public class RegisterViewModel
     {
+        [Required]        
+        [Display(Name = "Логин")]
+        public string UserName { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
-
+        [Required]
+        [Display(Name = "ФИО")]
+        public string FullName { get; set; }
+        [Required]
+        [Display(Name = "Группа")]
+        public string  Group{ get; set; }
         [Required]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
         [DataType(DataType.Password)]

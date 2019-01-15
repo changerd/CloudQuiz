@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CloudQuiz.Models;
+using System.Text.RegularExpressions;
 
 namespace CloudQuiz.Controllers
 {
@@ -15,6 +16,7 @@ namespace CloudQuiz.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        QuizContext context = new QuizContext();
 
         public ManageController()
         {
@@ -64,8 +66,18 @@ namespace CloudQuiz.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = context.Users.Find(userId);
+            if (user == null)
+                return HttpNotFound();
             var model = new IndexViewModel
             {
+                Id = user.Id,
+                UserName = user.UserName,
+                FullName = user.FullName,
+                Email = user.Email,
+                Birth = user.Birth,
+                Group = user.Group,
+                Telephone = user.PhoneNumber,
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
@@ -332,8 +344,38 @@ namespace CloudQuiz.Controllers
 
             base.Dispose(disposing);
         }
+        public ActionResult Edit(string id)
+        {
+            var user = context.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+        [HttpPost]
+        public async Task<ActionResult> Edit(ApplicationUser model)
+        {
+            ApplicationUser user = await UserManager.FindByIdAsync(model.Id);
+            user.Email = model.Email;
+            user.FullName = model.FullName;
+            user.Birth = model.Birth;
+            user.PhoneNumber = model.PhoneNumber;
+            user.Group = model.Group;
+            string reg = ".+\\@.+\\..+";
+            if (!string.IsNullOrEmpty(user.Email) && !Regex.IsMatch(user.Email, reg))
+            {
+                ModelState.AddModelError("Email", "Не корректная электронная почта.");
+            }            
+            if (ModelState.IsValid)
+            {
+                IdentityResult result = await UserManager.UpdateAsync(user);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
 
-#region Вспомогательные приложения
+        #region Вспомогательные приложения
         // Используется для защиты от XSRF-атак при добавлении внешних имен входа
         private const string XsrfKey = "XsrfId";
 
