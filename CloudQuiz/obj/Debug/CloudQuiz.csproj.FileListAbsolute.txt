@@ -122,3 +122,8 @@ C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.pdb
 C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.Migrations.DataMigration.resources
 C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.csproj.GenerateResource.cache
 C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.Migrations.DataMigration1.resources
+C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.Migrations.DataMigration2.resources
+C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.Migrations.DataMigration3.resources
+C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.Migrations.DataMigration4.resources
+C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.Migrations.DataMigration5.resources
+C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.Migrations.DataMigration6.resources

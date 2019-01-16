@@ -1,0 +1,78 @@
+﻿@model CloudQuiz.Models.Quiz
+
+@{
+    ViewBag.Title = "Создание викторины";
+}
+
+<h2>Создание викторины</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuizName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QuizName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QuizName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuizDuration, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QuizDuration, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
+                @Html.ValidationMessageFor(model => model.QuizDuration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuizDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QuizDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QuizDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="questionblock">
+            
+        </div>        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a class="addQuestion btn btn-default">Добавить вопрос</a>
+                <input type="submit" value="Создать" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            var i = 0;
+            $('.addQuestion').click(function () {                
+                var html2Add =
+                    "<div class='form-group'>" +
+                    "<h4>Вопрос № " + (i + 1) + "</h4><hr />" +
+                    "<label class='control-label col-md-2'>Текст вопроса</label>" +
+                    "<div class='col-md-10'>" +
+                    "<input type='text' class='form-control' name='QuestionText[" + i + "]'/>" +
+                    "</div>" +
+                    "<label class='control-label col-md-2'>Описание</label>" +
+                    "<div class='col-md-10'>" +
+                    "<input type='text' class='form-control' name='QuestionDescription[" + i + "]'/>" +
+                    "</div>";
+                $('#questionblock').append(html2Add);
+                i++;
+            })
+        })
+    </script>
+}

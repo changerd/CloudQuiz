@@ -9,6 +9,7 @@ namespace CloudQuiz.Models
     {
         public int ResultId { get; set; }
         public int ResultScore { get; set; }
+        public DateTime ResultDate { get; set; }
         public int QuizId { get; set; }
         public int UserId { get; set; }
         public Quiz Quiz { get; set; }

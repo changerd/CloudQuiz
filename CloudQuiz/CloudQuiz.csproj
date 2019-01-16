@@ -174,11 +174,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infastructure\IdentityHelpers.cs" />
     <Compile Include="Migrations\201901150727185_DataMigration.cs" />
     <Compile Include="Migrations\201901150727185_DataMigration.Designer.cs">
       <DependentUpon>201901150727185_DataMigration.cs</DependentUpon>
@@ -186,6 +188,26 @@
     <Compile Include="Migrations\201901150853250_DataMigration1.cs" />
     <Compile Include="Migrations\201901150853250_DataMigration1.Designer.cs">
       <DependentUpon>201901150853250_DataMigration1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901151239008_DataMigration2.cs" />
+    <Compile Include="Migrations\201901151239008_DataMigration2.Designer.cs">
+      <DependentUpon>201901151239008_DataMigration2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901151449505_DataMigration3.cs" />
+    <Compile Include="Migrations\201901151449505_DataMigration3.Designer.cs">
+      <DependentUpon>201901151449505_DataMigration3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901160819098_DataMigration4.cs" />
+    <Compile Include="Migrations\201901160819098_DataMigration4.Designer.cs">
+      <DependentUpon>201901160819098_DataMigration4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901160843539_DataMigration5.cs" />
+    <Compile Include="Migrations\201901160843539_DataMigration5.Designer.cs">
+      <DependentUpon>201901160843539_DataMigration5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901161805279_DataMigration6.cs" />
+    <Compile Include="Migrations\201901161805279_DataMigration6.Designer.cs">
+      <DependentUpon>201901161805279_DataMigration6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -197,6 +219,7 @@
     <Compile Include="Models\Quiz.cs" />
     <Compile Include="Models\QuizContext.cs" />
     <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\RoleVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -259,6 +282,17 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\CreateRole.cshtml" />
+    <Content Include="Views\Admin\DeleteRole.cshtml" />
+    <Content Include="Views\Admin\DeleteUser.cshtml" />
+    <Content Include="Views\Admin\DetailsUser.cshtml" />
+    <Content Include="Views\Admin\EditRole.cshtml" />
+    <Content Include="Views\Admin\GetRole.cshtml" />
+    <Content Include="Views\Admin\GetUser.cshtml" />
+    <Content Include="Views\Admin\GiveRole.cshtml" />
+    <Content Include="Views\Admin\CreateQuiz.cshtml" />
+    <Content Include="Views\Admin\CreateQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -282,6 +316,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901150853250_DataMigration1.resx">
       <DependentUpon>201901150853250_DataMigration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901151239008_DataMigration2.resx">
+      <DependentUpon>201901151239008_DataMigration2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901151449505_DataMigration3.resx">
+      <DependentUpon>201901151449505_DataMigration3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901160819098_DataMigration4.resx">
+      <DependentUpon>201901160819098_DataMigration4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901160843539_DataMigration5.resx">
+      <DependentUpon>201901160843539_DataMigration5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901161805279_DataMigration6.resx">
+      <DependentUpon>201901161805279_DataMigration6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
