@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CloudQuiz.Models.Quiz>
+
+@{
+    ViewBag.Title = "Викторины";
+}
+
+<h2>Викторины</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QuizName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuizDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuizDescription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuizName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuizDuration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuizDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "EditQuiz", new { id=item.QuizId }) |
+            @Html.ActionLink("Подробнее", "DetailsQuiz", new { id=item.QuizId }) |
+            @Html.ActionLink("Удалить", "DeleteQuiz", new { id=item.QuizId })
+        </td>
+    </tr>
+}
+
+</table>

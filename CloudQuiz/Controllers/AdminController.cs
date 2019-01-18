@@ -3,6 +3,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -194,25 +196,255 @@ namespace CloudQuiz.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<ActionResult> CreateQuiz(Quiz quiz, List<string> QuestionText, List<string> QuestionDescription)
+        public async Task<ActionResult> CreateQuiz(Quiz quiz, List<string> QuestionText, List<string> QuestionDescription, List<string> QuestionAnswer, List<HttpPostedFileBase> uploadQuestionImage)
         {
             db.Quizzes.Add(quiz);
-            for(int i =0; i<QuestionText.Count;i++)
+            if (QuestionText != null)
             {
-                Question question = new Question
+                for (int i = 0; i < QuestionText.Count; i++)
                 {
-                    QuestionText = QuestionText[i],
-                    QuestionDescription = QuestionDescription[i],
-                    QuizId = quiz.QuizId
-                };
-                db.Questions.Add(question);
+                    Question question = new Question
+                    {
+                        QuestionText = QuestionText[i],
+                        QuestionDescription = QuestionDescription[i],
+                        QuestionAnswer = QuestionAnswer[i].ToLower(),
+                        QuizId = quiz.QuizId
+                    };
+                    if (uploadQuestionImage[i] != null)
+                    {
+                        byte[] imageData = null;
+                        using (var binaryReader = new BinaryReader(uploadQuestionImage[i].InputStream))
+                        {
+                            imageData = binaryReader.ReadBytes(uploadQuestionImage[i].ContentLength);
+                        }
+                        question.QuestionImage = imageData;
+                    }
+                    db.Questions.Add(question);
+                }
             }
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return CreateQuiz();
         }
-        public ActionResult CreateQuestion()
+        public ActionResult GetQuiz()
         {
-            return View();
+            return View(db.Quizzes.ToList());
+        }
+        public ActionResult EditQuiz(int id)
+        {
+            Quiz quiz = db.Quizzes.Find(id);
+            if (quiz == null)
+            {
+                return HttpNotFound();
+            }
+            return View(quiz);
+        }
+        [HttpPost]
+        public async Task<ActionResult> EditQuiz(Quiz quiz)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(quiz).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("GetQuiz");
+            }
+            return EditQuiz(quiz.QuizId);
+        }
+        public ActionResult DeleteQuiz(int id)
+        {
+            Quiz quiz = db.Quizzes.Find(id);
+            if (quiz == null)
+            {
+                return HttpNotFound();
+            }
+            return View(quiz);
+        }
+        [HttpPost, ActionName("DeleteQuiz")]
+        public async Task<ActionResult> DeleteQuizConfirmed(int id)
+        {
+            Quiz quiz = db.Quizzes.Find(id);
+            if (quiz == null)
+            {
+                return HttpNotFound();
+            }
+            db.Quizzes.Remove(quiz);
+            await db.SaveChangesAsync();
+            return RedirectToAction("GetQuiz");
+        }
+        public ActionResult DetailsQuiz(int id)
+        {
+            Quiz quiz = db.Quizzes.Find(id);
+            if (quiz == null)
+            {
+                return HttpNotFound();
+            }
+            return View(quiz);
+        }
+        public ActionResult CreateQuestion(int qid)
+        {
+            Question question = new Question
+            {
+                QuizId = qid
+            };            
+            return View(question);
+        }
+        [HttpPost]
+        public async Task<ActionResult> CreateQuestion(Question question, HttpPostedFileBase uploadQuestionImage)
+        {
+            question.QuestionAnswer = question.QuestionAnswer.ToLower();
+            if (uploadQuestionImage != null)
+            {
+                byte[] imageData = null;
+                using (var binaryReader = new BinaryReader(uploadQuestionImage.InputStream))
+                {
+                    imageData = binaryReader.ReadBytes(uploadQuestionImage.ContentLength);
+                }
+                question.QuestionImage = imageData;
+            }
+            if (ModelState.IsValid)
+            {
+                db.Questions.Add(question);
+                await db.SaveChangesAsync();
+                return RedirectToAction("DetailsQuiz", new { id = question.QuizId });
+            }
+            return (CreateQuestion(question.QuizId));
+        }
+        public ActionResult DetailsQuestion(int id)
+        {
+            var questions = db.Questions.Include(q => q.Choices).Include(q => q.Quiz).ToList();
+            var question = questions.Find(i => i.QuestionId == id);
+            if (question == null)
+                return HttpNotFound();
+            return View(question);
+        }
+        public ActionResult DeleteQuestion(int id)
+        {
+            var question = db.Questions.Find(id);
+            if (question == null)
+                return HttpNotFound();
+            return View(question);
+        }
+        [HttpPost, ActionName("DeleteQuestion")]
+        public async Task<ActionResult> DeleteQuestionConfimed(int id)
+        {
+            var question = db.Questions.Find(id);
+            if (question == null)
+                return HttpNotFound();
+            db.Questions.Remove(question);
+            await db.SaveChangesAsync();
+            return RedirectToAction("DetailsQuiz", new { id = question.QuizId });
+        }
+        public ActionResult EditQuestion(int id)
+        {
+            var question = db.Questions.Find(id);
+            if (question == null)
+                return HttpNotFound();
+            return View(question);
+        }
+        [HttpPost]
+        public async Task<ActionResult> EditQuestion(Question question, HttpPostedFileBase uploadQuestionImage, bool? deleteQuestionImage)
+        {
+            question.QuestionAnswer = question.QuestionAnswer.ToLower();
+            if (uploadQuestionImage != null)
+            {
+                byte[] imageData = null;
+                using (var binaryReader = new BinaryReader(uploadQuestionImage.InputStream))
+                {
+                    imageData = binaryReader.ReadBytes(uploadQuestionImage.ContentLength);
+                }
+                question.QuestionImage = imageData;
+            }
+            if (deleteQuestionImage == true)
+            {
+                Array.Clear(question.QuestionImage, 0, question.QuestionImage.Length);
+            }
+            if (ModelState.IsValid)
+            {
+                db.Entry(question).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("DetailsQuestion", new { id = question.QuestionId });
+            }
+            return EditQuestion(question.QuestionId);
+        }
+        public ActionResult CreateChoice(int qid)
+        {
+            Choice choice = new Choice
+            {
+                QuestionId = qid,
+            };
+            return View(choice);
+        }
+        [HttpPost]
+        public async Task<ActionResult> CreateChoice(Choice choice)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Choices.Add(choice);
+                await db.SaveChangesAsync();
+                return RedirectToAction("DetailsQuestion", new { id = choice.QuestionId });
+            }
+            return CreateChoice(choice.ChoiceId);
+        }
+        public ActionResult EditChoice(int id)
+        {
+            var choice = db.Choices.Find(id);
+            if (choice == null)
+                return HttpNotFound();
+            return View(choice);
+        }
+        [HttpPost]
+        public async Task<ActionResult> EditChoice(Choice choice)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(choice).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("DetailsQuestion", new { id = choice.QuestionId });
+            }
+            return EditChoice(choice.ChoiceId);
+        }
+        public ActionResult DeleteChoice(int id)
+        {
+            var choice = db.Choices.Find(id);
+            if (choice == null)
+                return HttpNotFound();
+            return View(choice);
+        }
+        [HttpPost, ActionName("DeleteChoice")]
+        public async Task<ActionResult> DeleteChoiceConfirmed(int id)
+        {
+            var choice = db.Choices.Find(id);
+            if (choice == null)
+                return HttpNotFound();
+            db.Choices.Remove(choice);
+            await db.SaveChangesAsync();
+            return RedirectToAction("DetailsQuestion", new { id = choice.QuestionId });
+        }
+        public ActionResult PublishQuiz(int id)
+        {
+            List<ApplicationUser> users = db.Users.ToList();
+            ViewBag.Users = users;
+            var quiz = db.Quizzes.Find(id);
+            return View(quiz);
+        }
+        [HttpPost]
+        public async Task<ActionResult> PublishQuiz(Quiz quiz, string[] selectedUsers)
+        {
+            var quizz = db.Quizzes.Find(quiz.QuizId);
+            quizz.Users.Clear();
+            if (selectedUsers != null)
+            {
+                foreach(var item in db.Users.Where(u => selectedUsers.Contains(u.Id)))
+                {
+                    quizz.Users.Add(item);
+                }
+            }
+            db.Entry(quizz).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            return RedirectToAction("DetailsQuiz", new { id = quiz.QuizId });
         }
     }    
 }

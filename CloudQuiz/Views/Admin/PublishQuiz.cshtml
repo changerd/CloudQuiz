@@ -1,0 +1,80 @@
+﻿@model CloudQuiz.Models.Quiz
+
+@{
+    ViewBag.Title = "Публикация викторины: " + Model.QuizName;
+}
+
+<h2>Публикация викторины: @Model.QuizName</h2>
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.QuizId);
+
+    <table class="table">
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayName("Логин")
+            </th>
+            <th>
+                @Html.DisplayName("ФИО")
+            </th>
+            <th>
+                @Html.DisplayName("Группа")
+            </th>            
+        </tr>
+
+        @if (Model.Users != null)
+        {
+            foreach (var item in ViewBag.Users)
+            {
+                <tr>
+                    <th>
+                        <input type="checkbox" name="selectedUsers" value="@item.Id" @(Model.Users.Contains(item) ? "checked=\"checked\"" : "") />
+                    </th>
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td>
+                        @item.FullName
+                    </td>
+                    <td>
+                        @item.Group
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            foreach (var item in ViewBag.Users)
+            {
+                <tr>
+                    <th>
+                        <input type="checkbox" name="selectedUsers" value="@item.Id" @*@(Model.Categories.Contains(c) ? "checked=\"checked\"" : "")*@ />
+                    </th>
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td>
+                        @item.FullName
+                    </td>
+                    <td>
+                        @item.Group
+                    </td>
+                </tr>
+
+            }
+        }
+    </table>
+
+    <div class="form-group">        
+            <input type="submit" value="Опубликовать" class="btn btn-default" />        
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад", "DetailsQuiz", new { id = Model.QuizId })
+</div>

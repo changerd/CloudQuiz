@@ -1,19 +1,21 @@
 ﻿@model CloudQuiz.Models.Question
 
 @{
-    ViewBag.Title = "Создание вопроса";    
+    ViewBag.Title = "Редактирование вопроса";
 }
 
-<h2>Создание вопроса</h2>
+<h2>Редактирование вопроса</h2>
 
-@using (Html.BeginForm("CreateQuestion", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+@using (Html.BeginForm("EditQuestion", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.QuizId)
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.QuestionId)
+        @Html.HiddenFor(model => model.QuizId)
+
         <div class="form-group">
             @Html.LabelFor(model => model.QuestionText, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -38,22 +40,41 @@
             </div>
         </div>
 
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.QuizId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.QuizId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.QuizId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
         <div class="form-group">
-            @Html.LabelFor(model => model.QuestionImage, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Изображение", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input class="form-control" type="file" name="uploadQuestionImage" />
-                @Html.ValidationMessage("QuestionImage", new { @class = "text-danger" })
+                @if (Model.QuestionImage != null)
+                {
+                    @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.QuestionImage) + "\" />")
+                    <br />
+                }
+                <input type="file" name="uploadQuestionImage" />
+                <div>
+                    <input type="checkbox" name="deleteQuestionImage" />
+                    Удалить изображение
+                </div>
+
+
+
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Создать" class="btn btn-default" />
+                <input type="submit" value="Сохранить" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Назад", "DetailsQuiz", new { id=Model.QuizId })
+    @Html.ActionLink("Назад", "DetailsQuestion", new { id = Model.QuestionId })
 </div>

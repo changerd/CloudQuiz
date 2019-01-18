@@ -6,7 +6,7 @@
 
 <h2>Создание викторины</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateQuiz", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -69,6 +69,14 @@
                     "<label class='control-label col-md-2'>Описание</label>" +
                     "<div class='col-md-10'>" +
                     "<input type='text' class='form-control' name='QuestionDescription[" + i + "]'/>" +
+                    "</div>" +
+                    "<label class='control-label col-md-2'>Ответ</label>" +
+                    "<div class='col-md-10'>" +
+                    "<input type='text' class='form-control' name='QuestionAnswer[" + i + "]'/>" +
+                    "</div>" +
+                    "<label class='control-label col-md-2'>Изображение</label>" +
+                    "<div class='col-md-10'>" +
+                    "<input type='file' class='form-control' name='uploadQuestionImage[" + i + "]'/>" +
                     "</div>";
                 $('#questionblock').append(html2Add);
                 i++;

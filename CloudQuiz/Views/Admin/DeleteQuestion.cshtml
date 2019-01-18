@@ -1,0 +1,16 @@
+﻿@model CloudQuiz.Models.Question
+
+@{
+    ViewBag.Title = "Удаление вопроса";
+}
+
+<h1>Вы точно хотите удалить вопрос: <b>@Model.QuestionText</b>?</h1>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <input type="submit" value="Удалить" class="btn btn-danger" />
+        <a class="btn btn-default" href="@Url.Action("DetailsQuiz", "Admin", new { id = Model.QuizId})">Назад</a>
+    </div>
+}
+

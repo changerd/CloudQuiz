@@ -10,19 +10,19 @@ namespace CloudQuiz.Models
     {
         public int QuestionId { get; set; }
         [Required]
-        [Display(Name = "Содержание вопроса")]
+        [Display(Name = "Текст вопроса")]
         public string QuestionText { get; set; }
+        [Display(Name = "Ответ")]
+        public string QuestionAnswer { get; set; }
         [Display(Name = "Описание")]
         public string QuestionDescription { get; set; }
         [Display(Name = "Изображение")]
         public byte[] QuestionImage { get; set; }
         public int QuizId { get; set; }
-        public Quiz Quiz { get; set; }
-        public virtual ICollection<Answer> Answers { get; set; }
+        public Quiz Quiz { get; set; }        
         public virtual ICollection<Choice> Choices { get; set; }
         public Question()
-        {
-            Answers = new List<Answer>();
+        {            
             Choices = new List<Choice>();
         }
     }

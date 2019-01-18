@@ -1,0 +1,121 @@
+﻿@model CloudQuiz.Models.Quiz
+@using CloudQuiz.Models
+
+@{
+    ViewBag.Title = "Викторина: " + Model.QuizName;
+    QuizContext db = new QuizContext();
+    var Questions = db.Questions.Where(q => q.QuizId == Model.QuizId);
+}
+
+<h2>Викторина</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.QuizName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuizName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuizDuration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuizDuration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuizDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuizDescription)
+        </dd>
+
+    </dl>
+</div>
+
+<h3>Вопросы</h3>
+
+<p>
+    @Html.ActionLink("Создать вопрос", "CreateQuestion", new { qid = Model.QuizId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Текст")
+        </th>
+        <th>
+            @Html.DisplayName("Описание")
+        </th>
+        <th>
+            @Html.DisplayName("Ответ")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Questions)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionAnswer)
+            </td>
+            <td>
+                @Html.ActionLink("Подробнее", "DetailsQuestion", new { id = item.QuestionId }) |
+                @Html.ActionLink("Удалить", "DeleteQuestion", new { id = item.QuestionId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<h3>Пользователи</h3>
+
+<p>
+    @Html.ActionLink("Опубликовать", "PublishQuiz", new { id = Model.QuizId })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Логин")
+        </th>
+        <th>
+            @Html.DisplayName("ФИО")
+        </th>
+        <th>
+            @Html.DisplayName("Группа")
+        </th>
+    </tr>
+    @foreach (var item in Model.Users)
+    {
+        <tr>
+            <td>
+                @item.UserName
+            </td>
+            <td>
+                @item.FullName
+            </td>
+            <td>
+                @item.Group
+            </td>
+        </tr>
+    }
+</table>
+
+
+<p>
+    @Html.ActionLink("Редактировать", "EditQuiz", new { id = Model.QuizId })
+    <br />
+    @Html.ActionLink("Назад", "Index")
+</p>
