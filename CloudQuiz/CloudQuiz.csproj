@@ -213,6 +213,10 @@
     <Compile Include="Migrations\201901171449519_DataMigration7.Designer.cs">
       <DependentUpon>201901171449519_DataMigration7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901191410594_DataMigration8.cs" />
+    <Compile Include="Migrations\201901191410594_DataMigration8.Designer.cs">
+      <DependentUpon>201901191410594_DataMigration8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Choice.cs" />
@@ -262,7 +266,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -307,6 +310,9 @@
     <Content Include="Views\Admin\EditChoice.cshtml" />
     <Content Include="Views\Admin\DeleteChoice.cshtml" />
     <Content Include="Views\Admin\PublishQuiz.cshtml" />
+    <Content Include="Views\Home\StartQuiz.cshtml" />
+    <Content Include="Views\Home\ShowResult.cshtml" />
+    <Content Include="Views\Admin\ResultQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -348,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901171449519_DataMigration7.resx">
       <DependentUpon>201901171449519_DataMigration7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901191410594_DataMigration8.resx">
+      <DependentUpon>201901191410594_DataMigration8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

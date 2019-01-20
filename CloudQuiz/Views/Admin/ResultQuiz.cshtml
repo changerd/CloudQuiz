@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CloudQuiz.Models.Result>
+
+@{
+    ViewBag.Title = "Результаты";
+}
+
+<h2>Результаты викторины: @ViewBag.Name</h2>
+
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Логин")
+        </th>
+        <th>
+            @Html.DisplayName("ФИО")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResultDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResultScore)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResultDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResultScore)
+        </td>
+    </tr>
+}
+</table>
+
+<p>
+    <a class="btn btn-primary" href=@Url.Action("DetailsQuiz", new { id = ViewBag.Id})>Назад</a>
+</p>

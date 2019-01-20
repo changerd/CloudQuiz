@@ -8,6 +8,12 @@
 
 <div>
     <hr />
+    <div class="row">
+        <a class="btn btn-primary" href=@Url.Action("EditQuestion", new { id = Model.QuestionId })>Редактировать</a>
+        <a class="btn btn-primary" href=@Url.Action("CreateChoice", new { qid = Model.QuestionId })>Создать вариант ответа</a>
+        <a class="btn btn-default" href=@Url.Action("DetailsQuiz", new { id = Model.QuizId })>Назад</a>
+    </div>
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.QuestionText)
@@ -57,14 +63,11 @@
 
 <h3>Варианты ответа</h3>
 
-<p>
-    @Html.ActionLink("Создать вариант ответа", "CreateChoice", new { qid = Model.QuestionId })
-</p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayName("Название")
-        </th>        
+        </th>
         <th></th>
     </tr>
 
@@ -73,16 +76,11 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ChoiceText)
-            </td>            
+            </td>
             <td>
                 @Html.ActionLink("Редактировать", "EditChoice", new { id = item.ChoiceId }) |
                 @Html.ActionLink("Удалить", "DeleteChoice", new { id = item.ChoiceId })
             </td>
         </tr>
     }
-    </table>
-    <p>
-        @Html.ActionLink("Редактировать", "EditQuestion", new { id = Model.QuestionId })
-        <br />
-        @Html.ActionLink("Назад", "DetailsQuiz", new { id = Model.QuizId })
-    </p>
+</table>

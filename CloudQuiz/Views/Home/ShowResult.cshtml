@@ -1,0 +1,48 @@
+﻿@model CloudQuiz.Models.Result
+@using CloudQuiz.Models
+
+@{
+    ViewBag.Title = "Результат";    
+}
+
+<h2>Результат</h2>
+
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Викторина")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quiz.QuizName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResultScore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResultScore)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Правильных вопросов")
+        </dt>
+
+        <dd>
+            @ViewBag.Count
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResultDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResultDate)
+        </dd>
+    </dl>
+</div>
+<p>    
+    @Html.ActionLink("На главную", "Index")
+</p>

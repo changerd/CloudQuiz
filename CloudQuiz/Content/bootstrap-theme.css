@@ -372,7 +372,8 @@ fieldset[disabled] .btn-danger.active {
   background-repeat: repeat-x;
   border-radius: 4px;
 }
-.navbar-inverse .navbar-nav > .open > a,
+
+.navbar-nav > .open > a,
 .navbar-inverse .navbar-nav > .active > a {
   background-image: -webkit-linear-gradient(top, #080808 0%, #0f0f0f 100%);
   background-image:      -o-linear-gradient(top, #080808 0%, #0f0f0f 100%);

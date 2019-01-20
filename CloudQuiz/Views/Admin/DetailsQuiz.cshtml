@@ -10,6 +10,14 @@
 <h2>Викторина</h2>
 
 <div>
+    <hr />    
+    <div class="row">
+        <a class="btn btn-primary" href=@Url.Action("EditQuiz", new { id = Model.QuizId })>Редактировать</a>
+        <a class="btn btn-primary" href=@Url.Action("CreateQuestion", new { qid = Model.QuizId })>Создать вопрос</a>
+        <a class="btn btn-primary" href=@Url.Action("PublishQuiz", new { id = Model.QuizId })>Опубликовать</a>
+        <a class="btn btn-primary" href=@Url.Action("ResultQuiz", new { id = Model.QuizId })>Результаты</a>
+        <a class="btn btn-default" href=@Url.Action("GetQuiz")>Назад</a>
+    </div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -41,9 +49,6 @@
 
 <h3>Вопросы</h3>
 
-<p>
-    @Html.ActionLink("Создать вопрос", "CreateQuestion", new { qid = Model.QuizId })
-</p>
 <table class="table">
     <tr>
         <th>
@@ -81,10 +86,6 @@
 
 <h3>Пользователи</h3>
 
-<p>
-    @Html.ActionLink("Опубликовать", "PublishQuiz", new { id = Model.QuizId })
-</p>
-
 <table class="table">
     <tr>
         <th>
@@ -112,10 +113,3 @@
         </tr>
     }
 </table>
-
-
-<p>
-    @Html.ActionLink("Редактировать", "EditQuiz", new { id = Model.QuizId })
-    <br />
-    @Html.ActionLink("Назад", "Index")
-</p>

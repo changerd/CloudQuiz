@@ -446,5 +446,12 @@ namespace CloudQuiz.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("DetailsQuiz", new { id = quiz.QuizId });
         }
+        public ActionResult ResultQuiz(int id)
+        {
+            ViewBag.Name = db.Quizzes.Find(id).QuizName;
+            ViewBag.Id = id;
+            var results = db.Results.Include(u => u.User).Where(q => q.QuizId == id).ToList();
+            return View(results);
+        }
     }    
 }
