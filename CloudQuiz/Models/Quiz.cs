@@ -12,8 +12,9 @@ namespace CloudQuiz.Models
         [Required]
         [Display(Name = "Название")]
         public string QuizName { get; set; }
+        [Required]
         [Display(Name = "Длительность")]
-        public TimeSpan? QuizDuration { get; set; }
+        public TimeSpan QuizDuration { get; set; }
         [Display(Name = "Описание")]
         public string QuizDescription { get; set; }
         public virtual ICollection<Question> Questions { get; set; }

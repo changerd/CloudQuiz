@@ -41,10 +41,10 @@
                         <p>
                             @foreach (var choice in question.Choices)
                             {
-                                <input type="hidden" value="null" name="choices[@count]">
                                 <label class="radio-inline">
                                     <input type="radio" value="@choice.ChoiceText" name="choices[@count]"> @choice.ChoiceText
                                 </label><br />
+                                <input type="hidden" value="null" name="choices[@count]">
                             }
                         </p>
                     }

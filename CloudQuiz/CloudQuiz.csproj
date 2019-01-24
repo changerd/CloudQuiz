@@ -181,42 +181,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infastructure\IdentityHelpers.cs" />
-    <Compile Include="Migrations\201901150727185_DataMigration.cs" />
-    <Compile Include="Migrations\201901150727185_DataMigration.Designer.cs">
-      <DependentUpon>201901150727185_DataMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901150853250_DataMigration1.cs" />
-    <Compile Include="Migrations\201901150853250_DataMigration1.Designer.cs">
-      <DependentUpon>201901150853250_DataMigration1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901151239008_DataMigration2.cs" />
-    <Compile Include="Migrations\201901151239008_DataMigration2.Designer.cs">
-      <DependentUpon>201901151239008_DataMigration2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901151449505_DataMigration3.cs" />
-    <Compile Include="Migrations\201901151449505_DataMigration3.Designer.cs">
-      <DependentUpon>201901151449505_DataMigration3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901160819098_DataMigration4.cs" />
-    <Compile Include="Migrations\201901160819098_DataMigration4.Designer.cs">
-      <DependentUpon>201901160819098_DataMigration4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901160843539_DataMigration5.cs" />
-    <Compile Include="Migrations\201901160843539_DataMigration5.Designer.cs">
-      <DependentUpon>201901160843539_DataMigration5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901161805279_DataMigration6.cs" />
-    <Compile Include="Migrations\201901161805279_DataMigration6.Designer.cs">
-      <DependentUpon>201901161805279_DataMigration6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901171449519_DataMigration7.cs" />
-    <Compile Include="Migrations\201901171449519_DataMigration7.Designer.cs">
-      <DependentUpon>201901171449519_DataMigration7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901191410594_DataMigration8.cs" />
-    <Compile Include="Migrations\201901191410594_DataMigration8.Designer.cs">
-      <DependentUpon>201901191410594_DataMigration8.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Choice.cs" />
@@ -313,6 +277,8 @@
     <Content Include="Views\Home\StartQuiz.cshtml" />
     <Content Include="Views\Home\ShowResult.cshtml" />
     <Content Include="Views\Admin\ResultQuiz.cshtml" />
+    <Content Include="Views\Home\Help.cshtml" />
+    <Content Include="Views\Admin\Help.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -329,35 +295,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901150727185_DataMigration.resx">
-      <DependentUpon>201901150727185_DataMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901150853250_DataMigration1.resx">
-      <DependentUpon>201901150853250_DataMigration1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901151239008_DataMigration2.resx">
-      <DependentUpon>201901151239008_DataMigration2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901151449505_DataMigration3.resx">
-      <DependentUpon>201901151449505_DataMigration3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901160819098_DataMigration4.resx">
-      <DependentUpon>201901160819098_DataMigration4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901160843539_DataMigration5.resx">
-      <DependentUpon>201901160843539_DataMigration5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901161805279_DataMigration6.resx">
-      <DependentUpon>201901161805279_DataMigration6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901171449519_DataMigration7.resx">
-      <DependentUpon>201901171449519_DataMigration7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901191410594_DataMigration8.resx">
-      <DependentUpon>201901191410594_DataMigration8.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

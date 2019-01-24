@@ -453,5 +453,9 @@ namespace CloudQuiz.Controllers
             var results = db.Results.Include(u => u.User).Where(q => q.QuizId == id).ToList();
             return View(results);
         }
+        public ActionResult Help()
+        {
+            return View();
+        }
     }    
 }

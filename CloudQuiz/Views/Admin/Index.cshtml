@@ -5,30 +5,29 @@
 <h2>Панель администратора</h2>
 <hr />
 <div class="col-md-12">
-    
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Данные о пользователях</div>
-                    <div class="panel-body">
-                        <div class="list-group">
-                            @Html.ActionLink("Роли", "GetRole", "Admin", new { @class = "list-group-item" })
-                            @Html.ActionLink("Пользователи", "GetUser", "Admin", new { @class = "list-group-item" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Викторины</div>
-                    <div class="panel-body">
-                        <div class="list-group">
-                            @Html.ActionLink("Создать викторину", "CreateQuiz", "Admin", new { @class = "list-group-item" })
-                            @Html.ActionLink("Просмотр викторин", "GetQuiz", "Admin", new { @class = "list-group-item" })
-                        </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Данные о пользователях</div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        @Html.ActionLink("Роли", "GetRole", "Admin", new { @class = "list-group-item" })
+                        @Html.ActionLink("Пользователи", "GetUser", "Admin", new { @class = "list-group-item" })
                     </div>
                 </div>
             </div>
         </div>
-    
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Викторины</div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        @Html.ActionLink("Создать викторину", "CreateQuiz", "Admin", new { @class = "list-group-item" })
+                        @Html.ActionLink("Просмотр викторин", "GetQuiz", "Admin", new { @class = "list-group-item" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="text-center">@Html.ActionLink("Помощь", "Help", "Admin")</p>
 </div>

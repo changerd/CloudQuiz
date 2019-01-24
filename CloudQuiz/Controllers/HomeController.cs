@@ -20,7 +20,7 @@ namespace CloudQuiz.Controllers
         public ActionResult StartQuiz(int id)
         {
             var quiz = context.Quizzes.Find(id);
-            long secinterval = (quiz.QuizDuration.Value.Hours * 3600 * 1000) + (quiz.QuizDuration.Value.Minutes * 60 * 1000) + (quiz.QuizDuration.Value.Seconds * 1000);
+            long secinterval = (quiz.QuizDuration.Hours * 3600 * 1000) + (quiz.QuizDuration.Minutes * 60 * 1000) + (quiz.QuizDuration.Seconds * 1000);
             ViewBag.Interval = secinterval;
             return View(quiz);
         }
@@ -56,6 +56,10 @@ namespace CloudQuiz.Controllers
             var results = context.Results.Include(q => q.Quiz).ToList();
             Result result = results.Find(i => i.ResultId == id);
             return View(result);
+        }
+        public ActionResult Help()
+        {
+            return View();
         }
         public ActionResult About()
         {
