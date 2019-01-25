@@ -56,7 +56,7 @@
                     @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.QuestionImage) + "\" />")
                     <br />
                 }
-                <input type="file" name="uploadQuestionImage" />
+                <input accept="image/jpeg,image/png" type="file" name="uploadQuestionImage" />
                 <div>
                     <input type="checkbox" name="deleteQuestionImage" />
                     Удалить изображение

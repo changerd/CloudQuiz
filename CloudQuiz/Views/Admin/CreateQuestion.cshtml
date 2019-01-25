@@ -41,7 +41,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.QuestionImage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input class="form-control" type="file" name="uploadQuestionImage" />
+                <input accept="image/jpeg,image/png" class="form-control" type="file" name="uploadQuestionImage" />
                 @Html.ValidationMessage("QuestionImage", new { @class = "text-danger" })
             </div>
         </div>
