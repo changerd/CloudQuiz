@@ -199,10 +199,14 @@ namespace CloudQuiz.Controllers
         public async Task<ActionResult> CreateQuiz(Quiz quiz, List<string> QuestionText, List<string> QuestionDescription, List<string> QuestionAnswer, List<HttpPostedFileBase> uploadQuestionImage)
         {
             db.Quizzes.Add(quiz);
-            if (QuestionText != null)
+            if (QuestionText != null && QuestionAnswer != null)
             {
                 for (int i = 0; i < QuestionText.Count; i++)
                 {
+                    if (String.IsNullOrEmpty(QuestionText[i]) || String.IsNullOrEmpty(QuestionAnswer[i]))
+                    {
+                        ModelState.AddModelError("Questions", "Не заполнен текст вопроса или ответ на вопрос");
+                    }
                     Question question = new Question
                     {
                         QuestionText = QuestionText[i],
