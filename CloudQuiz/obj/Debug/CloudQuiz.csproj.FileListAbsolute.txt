@@ -119,3 +119,5 @@ C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.csproj.CopyComplete
 C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.dll
 C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.pdb
 C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.csprojAssemblyReference.cache
+C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.Migrations.DataMigration.resources
+C:\pr\CloudQuiz\CloudQuiz\obj\Debug\CloudQuiz.csproj.GenerateResource.cache
